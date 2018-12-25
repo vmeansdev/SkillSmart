@@ -85,6 +85,9 @@ public class LinkedList
             if (prevNode == null && node.value == _value) {
                 this.head = node.next;
                 node = node.next;
+                if (node == null) {
+                    this.tail = null;
+                }
                 continue;
             }
 

@@ -169,7 +169,7 @@ public class Main {
         list.removeAll(0);
         test(
                 sizeBeforeRemove == list.count() + 3,
-                "Two elements should be removed from list"
+                "Three elements should be removed from list"
         );
         test(
                 list.head == node1,
