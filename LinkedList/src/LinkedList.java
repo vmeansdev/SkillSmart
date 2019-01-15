@@ -74,8 +74,8 @@ public class LinkedList
         if (this.head == null)
             return;
 
-        Node node = this.head;
         Node prevNode = null;
+        Node node = this.head;
 
         if (node.next == null && node.value == _value) {
             clear();
@@ -95,6 +95,9 @@ public class LinkedList
             node = node.next;
 
             if (node != null && node.value == _value) {
+                while (node.next != null && node.next.value == _value) {
+                    node = node.next;
+                }
                 prevNode.next = node.next;
                 node = node.next;
             }

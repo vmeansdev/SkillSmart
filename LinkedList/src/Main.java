@@ -150,12 +150,12 @@ public class Main {
     private static void testRemoveAllMethodWorksProperly() {
         LinkedList list = new LinkedList();
 
-        Node node = new Node(0);
-        Node node1 = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(0);
-        Node node4 = new Node(4);
-        Node node5 = new Node(0);
+        Node node = new Node(1);
+        Node node1 = new Node(2);
+        Node node2 = new Node(3);
+        Node node3 = new Node(1);
+        Node node4 = new Node(5);
+        Node node5 = new Node(1);
 
         list.addInTail(node);
         list.addInTail(node1);
@@ -166,22 +166,13 @@ public class Main {
 
 
         int sizeBeforeRemove = list.count();
-        list.removeAll(0);
+        list.removeAll(1);
         test(
-                sizeBeforeRemove == list.count() + 3,
-                "Three elements should be removed from list"
-        );
-        test(
-                list.head == node1,
-                "List head should become node1"
-        );
-        test(
-                list.tail == node4,
-                "List tail should become latest left value"
-        );
-        test (
-                list.tail != node5,
-                "List tail should not be equal to removed value"
+                list.count() == 3,
+                "List contains "
+                + list.count()
+                + " elements, but should contain 3 "
+                + list.toString()
         );
     }
 
