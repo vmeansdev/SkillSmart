@@ -12,6 +12,7 @@ public class Main {
         testFindMethodWorksProperlyForMultipleNodes();
         testFindAllMethodWorksProperly();
 
+        testRemoveMethodForSingleElementWorksProperly();
         testRemoveMethodWorksProperly();
         testRemoveAllMethodWorksProperly();
 
@@ -112,6 +113,17 @@ public class Main {
         List<Node> ones = new ArrayList<>();
         ones.add(node1);
         test(foundOnes.size() == ones.size(), "Lists should be equal");
+    }
+
+    private static void testRemoveMethodForSingleElementWorksProperly() {
+        LinkedList list = new LinkedList();
+        Node node = new Node(0);
+        list.addInTail(node);
+        list.remove(0);
+
+        test(list.count() == 0, "List size should be 0");
+        test(list.head == null, "List head should be null");
+        test(list.tail == null, "List tail should be null");
     }
 
     private static void testRemoveMethodWorksProperly() {
