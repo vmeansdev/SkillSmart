@@ -13,6 +13,7 @@ public class Main {
         testFindAllMethodWorksProperly();
 
         testRemoveMethodForSingleElementWorksProperly();
+        testRemoveMethodForTwoElementsWorksProperly();
         testRemoveMethodWorksProperly();
         testRemoveAllMethodWorksProperly();
 
@@ -126,6 +127,19 @@ public class Main {
         test(list.tail == null, "List tail should be null");
     }
 
+    private static void testRemoveMethodForTwoElementsWorksProperly() {
+        LinkedList list = new LinkedList();
+        Node node = new Node(0);
+        Node node1 = new Node(1);
+        list.addInTail(node);
+        list.addInTail(node1);
+
+        list.remove(1);
+        test(list.count() == 1, "List size should be 1");
+        test(list.head == node, "New list head should be node1");
+        test(list.tail == node, "New list tail should be node1");
+    }
+
     private static void testRemoveMethodWorksProperly() {
         LinkedList list = new LinkedList();
         boolean emptyRemoved = list.remove(0);
@@ -185,6 +199,10 @@ public class Main {
                 + list.count()
                 + " elements, but should contain 3 "
                 + list.toString()
+        );
+        test(
+                list.head.value == 2,
+                "List head value should be equal to the new first node value"
         );
     }
 
