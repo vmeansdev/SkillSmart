@@ -130,14 +130,12 @@ public class LinkedList
 
     public void insertAfter(Node nodeAfter, Node nodeToInsert)
     {
-        if (nodeAfter == null)
-            return;
-
         if (nodeToInsert == null)
             return;
 
-        if (this.count() == 0) {
-            this.addInTail(nodeToInsert);
+        if (count() == 0) {
+            addInTail(nodeToInsert);
+            return;
         }
 
         Node node = this.head;

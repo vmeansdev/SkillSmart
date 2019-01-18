@@ -20,6 +20,8 @@ public class Main {
 
         testClearMethodWorksProperly();
         testInsertAfterMethodWorksProperly();
+        testInsertAfterWorksForEmptyList();
+        testInsertAfterInsertsNothingWhenNullsPassed();
 
         testAddMethodWorksProperly();
     }
@@ -37,12 +39,28 @@ public class Main {
                 list.count() == 1,
                 "List should have at least one element after adding one node to it"
         );
+        test(
+                list.head == node,
+                "List head should be equal to node"
+        );
+        test(
+                list.tail == node,
+                "List tail should be equal to node"
+        );
 
         Node node1 = new Node(1);
         list.addInTail(node1);
         test(
                 list.count() == 2,
                 "List should have two elements after adding two nodes to it"
+        );
+        test(
+                list.head == node,
+                "List head still should be equal to node"
+        );
+        test(
+                list.tail == node1,
+                "List tail should become node1"
         );
     }
 
@@ -271,6 +289,43 @@ public class Main {
         test(
                 list.tail == lastNode,
                 "Node inserted after tail should become tail"
+        );
+    }
+
+    private static void testInsertAfterWorksForEmptyList() {
+        LinkedList list = new LinkedList();
+        Node node = new Node(0);
+        list.insertAfter(null, node);
+
+        test(
+                list.count() == 1,
+                "List size should be 1"
+        );
+        test(
+                list.head == node,
+                "List head should be node"
+        );
+        test(
+                list.tail == node,
+                "List tail should be node"
+        );
+    }
+
+    private static void testInsertAfterInsertsNothingWhenNullsPassed() {
+        LinkedList list = new LinkedList();
+        list.insertAfter(null, null);
+
+        test(
+                list.count() == 0,
+                "List size should be 0"
+        );
+        test(
+                list.head == null,
+                "List head should be null"
+        );
+        test(
+                list.tail == null,
+                "List tail should be null"
         );
     }
 
