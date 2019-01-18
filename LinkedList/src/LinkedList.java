@@ -61,7 +61,10 @@ public class LinkedList
                     this.tail = prevNode;
                 }
             } else {
-                this.head = this.tail = node.next;
+                this.head = node.next;
+                if (node.next == null) {
+                    this.tail = null;
+                }
             }
             return true;
         }

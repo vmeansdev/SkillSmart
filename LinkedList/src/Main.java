@@ -14,6 +14,7 @@ public class Main {
 
         testRemoveMethodForSingleElementWorksProperly();
         testRemoveMethodForTwoElementsWorksProperly();
+        testRemoveMethodForThreeElementsWorksProperly();
         testRemoveMethodWorksProperly();
         testRemoveAllMethodWorksProperly();
 
@@ -134,10 +135,26 @@ public class Main {
         list.addInTail(node);
         list.addInTail(node1);
 
-        list.remove(1);
+        list.remove(0);
         test(list.count() == 1, "List size should be 1");
-        test(list.head == node, "New list head should be node1");
-        test(list.tail == node, "New list tail should be node1");
+        test(list.head == node1, "New list head should be node1");
+        test(list.tail == node1, "New list tail should be node1");
+    }
+
+    private static void testRemoveMethodForThreeElementsWorksProperly() {
+        LinkedList list = new LinkedList();
+        Node node = new Node(0);
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+
+        list.remove(0);
+        test(list.count() == 2, "List size should be 2");
+        test(list.head == node1, "List head should be node1");
+        test(list.tail == node2, "List tail should be node2");
     }
 
     private static void testRemoveMethodWorksProperly() {
