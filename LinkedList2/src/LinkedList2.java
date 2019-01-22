@@ -26,7 +26,6 @@ public class LinkedList2
 
     public Node find(int _value)
     {
-        // здесь будет ваш код поиска
         Node node = head;
         while (node != null) {
             if (node.value == _value) {
@@ -40,7 +39,6 @@ public class LinkedList2
     public ArrayList<Node> findAll(int _value)
     {
         ArrayList<Node> nodes = new ArrayList<Node>();
-        // здесь будет ваш код поиска всех узлов по заданному значению
         Node node = this.head;
         while (node != null) {
             if (node.value == _value)
@@ -52,7 +50,6 @@ public class LinkedList2
 
     public boolean remove(int _value)
     {
-        // здесь будет ваш код удаления одного узла по заданному значению
         Node node = head;
         if (node == null) {
             return false;
@@ -77,12 +74,11 @@ public class LinkedList2
             return true;
         }
 
-        return false; // если узел был удалён
+        return false;
     }
 
     public void removeAll(int _value)
     {
-        // здесь будет ваш код удаления всех узлов по заданному значению
         if (this.head == null)
             return;
 
@@ -118,7 +114,6 @@ public class LinkedList2
 
     public void clear()
     {
-        // здесь будет ваш код очистки всего списка
         head = null;
         tail = null;
     }
@@ -131,12 +126,11 @@ public class LinkedList2
             count += 1;
             node = node.next;
         }
-        return count; // здесь будет ваш код подсчёта количества элементов в списке
+        return count; 
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        // здесь будет ваш код вставки узла после заданного узла
         if (_nodeToInsert == null) {
             return;
         }
@@ -146,8 +140,6 @@ public class LinkedList2
             return;
         }
 
-        // если _nodeAfter = null
-        // добавьте новый элемент первым в списке
         if (_nodeAfter == null) {
             head.prev = _nodeToInsert;
             _nodeToInsert.next = head;
