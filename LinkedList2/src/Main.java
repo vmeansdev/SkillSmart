@@ -17,6 +17,8 @@ public class Main {
         testRemoveMethodForThreeElementsWorksProperly();
         testRemoveMethodWorksProperly();
         testRemoveAllMethodWorksProperly();
+        testRemoveAllMethodWorksProperlyForSameValues();
+        testRemoveAllMethodWorksProperlyForMostlySameValues();
 
         testClearMethodWorksProperly();
         testInsertAfterMethodWorksProperly();
@@ -236,6 +238,76 @@ public class Main {
         test(
                 list.head.value == 2,
                 "List head value should be equal to the new first node value"
+        );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForSameValues() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(1);
+        Node node1 = new Node(1);
+        Node node2 = new Node(1);
+        Node node3 = new Node(1);
+        Node node4 = new Node(1);
+        Node node5 = new Node(1);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+
+        list.removeAll(1);
+        test(
+                list.count() == 0,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 0 "
+                        + list.toString()
+        );
+        test(
+                list.head == null,
+                "List head should be null"
+        );
+        test(
+                list.tail == null,
+                "List tail should be null"
+        );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForMostlySameValues() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(1);
+        Node node1 = new Node(2);
+        Node node2 = new Node(1);
+        Node node3 = new Node(4);
+        Node node4 = new Node(1);
+        Node node5 = new Node(1);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+
+        list.removeAll(1);
+        test(
+                list.count() == 2,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 2 "
+                        + list.toString()
+        );
+        test(
+                list.head == node1,
+                "List head should be node1"
+        );
+        test(
+                list.tail == node3,
+                "List tail should be node3"
         );
     }
 

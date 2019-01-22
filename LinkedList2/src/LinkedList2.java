@@ -92,21 +92,39 @@ public class LinkedList2
             if (node.prev == null && node.value == _value) {
                 this.head = node.next;
                 node = node.next;
+                if (this.head != null && this.head.prev != null) {
+                    this.head.prev = null;
+                }
                 if (node == null) {
                     this.tail = null;
                 }
                 continue;
             }
 
-            node.prev = node;
             node = node.next;
 
             if (node != null && node.value == _value) {
-                while (node.next != null && node.next.value == _value) {
-                    node = node.next;
+                if (node.next != null) {
+                    node.next.prev = node.prev;
                 }
-                node.prev.next = node.next;
+                if (node.prev != null) {
+                    node.prev.next = node.next;
+                }
                 node = node.next;
+
+                if (node != null) {
+                    if (node.next == null) {
+                        if (node.value == _value) {
+                            node.prev.next = null;
+                            this.tail = node.prev;
+                        } else {
+                            this.tail = node;
+                        }
+                    }
+                    if (node.prev == null) {
+                        this.head = node;
+                    }
+                }
             }
 
         }
@@ -161,6 +179,21 @@ public class LinkedList2
             }
             node = node.next;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        Node node = this.head;
+        while (node != null) {
+            String stringVal = this.tail == node ? String.valueOf(node.value) : node.value + ", ";
+            builder.append(stringVal);
+            node = node.next;
+        }
+        builder.append("]");
+
+        return builder.toString();
     }
 }
 
