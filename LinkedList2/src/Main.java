@@ -26,6 +26,8 @@ public class Main {
 
         testClearMethodWorksProperly();
         testInsertAfterMethodWorksProperly();
+        testInsertAfterMethodWorksProperly1();
+        testInsertAfterMethodWorksProperly2();
         testInsertAfterWorksForEmptyList();
         testInsertAfterInsertsNothingWhenNullsPassed();
     }
@@ -538,30 +540,6 @@ public class Main {
                         + " elements, but should contain 4 "
                         + list.toString()
         );
-//        test(
-//                list.head == node,
-//                "List head should be node"
-//        );
-//        test(
-//                list.head.prev == null,
-//                "List head should not have prev value"
-//        );
-//        test(
-//                list.head.next == node1,
-//                "List head.next should be node1"
-//        );
-//        test(
-//                list.tail == node5,
-//                "List tail should be node5"
-//        );
-//        test(
-//                list.tail.next == null,
-//                "List tail should not have next value"
-//        );
-//        test(
-//                list.tail.prev == node4,
-//                "List tail.prev should be node4"
-//        );
     }
 
     private static void testClearMethodWorksProperly() {
@@ -612,6 +590,107 @@ public class Main {
         test(
                 list.tail == lastNode,
                 "Node inserted after tail should become tail"
+        );
+    }
+
+    private static void testInsertAfterMethodWorksProperly1() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(0);
+        list.addInTail(node);
+
+        int sizeBeforeInsert = list.count();
+        Node node1 = new Node(1);
+        list.insertAfter(node, node1);
+        test(
+                list.count() == sizeBeforeInsert + 1,
+                "List size should be increased by one"
+        );
+        test (
+                list.head == node,
+                "List head should be node"
+        );
+        test (
+                list.head.next == node1,
+                "List head.next should be node1"
+        );
+        test (
+                list.tail == node1,
+                "List tail should be node1"
+        );
+        test(
+                list.tail.next == null,
+                "List tail.next should be null"
+        );
+        test (
+                list.tail.prev == node,
+                "List tail.prev should be node1"
+        );
+
+    }
+
+    private static void testInsertAfterMethodWorksProperly2() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(0);
+        list.addInTail(node);
+
+        int sizeBeforeInsert = list.count();
+        Node node1 = new Node(1);
+        list.insertAfter(node, node1);
+        test(
+                list.count() == sizeBeforeInsert + 1,
+                "List size should be increased by one"
+        );
+        test (
+                list.head == node,
+                "List head should be node"
+        );
+        test (
+                list.head.next == node1,
+                "List head.next should be node1"
+        );
+        test (
+                list.tail == node1,
+                "List tail should be node1"
+        );
+        test(
+                list.tail.next == null,
+                "List tail.next should be null"
+        );
+        test (
+                list.tail.prev == node,
+                "List tail.prev should be node1"
+        );
+
+        Node node2 = new Node(2);
+        list.insertAfter(node1, node2);
+        test(
+                list.tail == node2,
+                "List tail should become node2"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should be null"
+        );
+        test (
+                list.tail.prev == node1,
+                "List tail.prev should be node1"
+        );
+
+        Node node3 = new Node(3);
+        list.insertAfter(node1, node3);
+        test(
+                list.tail == node2,
+                "List tail should still be node2"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should be null"
+        );
+        test (
+                list.tail.prev == node3,
+                "List tail.prev should be node3"
         );
     }
 

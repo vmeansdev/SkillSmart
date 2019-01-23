@@ -147,12 +147,14 @@ public class LinkedList2
         Node node = this.head;
         while (node != null) {
             if (node == _nodeAfter) {
-                _nodeToInsert.prev = node.prev;
-                _nodeToInsert.next = node.next;
+                _nodeToInsert.prev = _nodeAfter;
+                _nodeToInsert.next = _nodeAfter.next;
                 _nodeAfter.next = _nodeToInsert;
 
-                if (_nodeToInsert.next == null) {
-                    this.tail = _nodeToInsert;
+                if (_nodeToInsert.next != null) {
+                    _nodeToInsert.next.prev = _nodeToInsert;
+                } else {
+                    tail = _nodeToInsert;
                 }
 
                 return;
