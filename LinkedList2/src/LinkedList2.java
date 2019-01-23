@@ -83,50 +83,32 @@ public class LinkedList2
             return;
 
         Node node = this.head;
-
-        if (node.next == null && node.value == _value) {
-            clear();
-        }
+        Node lastDiffNode = null;
 
         while (node != null) {
-            if (node.prev == null && node.value == _value) {
-                this.head = node.next;
-                node = node.next;
-                if (this.head != null && this.head.prev != null) {
-                    this.head.prev = null;
-                }
-                if (node == null) {
-                    this.tail = null;
-                }
-                continue;
-            }
-
-            node = node.next;
-
-            if (node != null && node.value == _value) {
-                if (node.next != null) {
+            if (node.value == _value) {
+                if (node.next == null) {
+                    if (head == node) {
+                        clear();
+                        return;
+                    } else {
+                        if (lastDiffNode != null)
+                            lastDiffNode.next = null;
+                        tail = lastDiffNode;
+                    }
+                } else {
                     node.next.prev = node.prev;
                 }
-                if (node.prev != null) {
+
+                if (node.prev == null) {
+                    head = node.next;
+                } else {
                     node.prev.next = node.next;
                 }
-                node = node.next;
-
-                if (node != null) {
-                    if (node.next == null) {
-                        if (node.value == _value) {
-                            node.prev.next = null;
-                            this.tail = node.prev;
-                        } else {
-                            this.tail = node;
-                        }
-                    }
-                    if (node.prev == null) {
-                        this.head = node;
-                    }
-                }
+            } else {
+                lastDiffNode = node;
             }
-
+            node = node.next;
         }
     }
 

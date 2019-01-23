@@ -235,9 +235,13 @@ public class Main {
                         + " elements, but should contain 3 "
                         + list.toString()
         );
-        test(
-                list.head.value == 2,
-                "List head value should be equal to the new first node value"
+        test (
+                list.head == node1,
+                "List head should be node1"
+        );
+        test (
+                list.tail == node4,
+                "List tail should be node4"
         );
     }
 
@@ -279,12 +283,12 @@ public class Main {
     private static void testRemoveAllMethodWorksProperlyForMostlySameValues() {
         LinkedList2 list = new LinkedList2();
 
-        Node node = new Node(1);
-        Node node1 = new Node(2);
+        Node node = new Node(3);
+        Node node1 = new Node(1);
         Node node2 = new Node(1);
-        Node node3 = new Node(4);
+        Node node3 = new Node(1);
         Node node4 = new Node(1);
-        Node node5 = new Node(1);
+        Node node5 = new Node(5);
 
         list.addInTail(node);
         list.addInTail(node1);
@@ -302,12 +306,12 @@ public class Main {
                         + list.toString()
         );
         test(
-                list.head == node1,
-                "List head should be node1"
+                list.head == node,
+                "List head should be node"
         );
         test(
-                list.tail == node3,
-                "List tail should be node3"
+                list.tail == node5,
+                "List tail should be node5"
         );
     }
 
