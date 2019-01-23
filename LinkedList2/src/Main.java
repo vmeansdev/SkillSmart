@@ -19,6 +19,9 @@ public class Main {
         testRemoveAllMethodWorksProperly();
         testRemoveAllMethodWorksProperlyForSameValues();
         testRemoveAllMethodWorksProperlyForMostlySameValues();
+        testRemoveAllMethodWorksProperlyForMostlySameValues2();
+        testRemoveAllMethodWorksProperlyForMostlySameValues3();
+        testRemoveAllMethodWorksProperlyForMostlySameValues4();
 
         testClearMethodWorksProperly();
         testInsertAfterMethodWorksProperly();
@@ -210,6 +213,12 @@ public class Main {
 
     private static void testRemoveAllMethodWorksProperly() {
         LinkedList2 list = new LinkedList2();
+        list.removeAll(1);
+        test(
+                list.count() == 0,
+                "List count should be 0"
+        );
+
 
         Node node = new Node(1);
         Node node1 = new Node(2);
@@ -225,7 +234,6 @@ public class Main {
         list.addInTail(node4);
         list.addInTail(node5);
 
-
         int sizeBeforeRemove = list.count();
         list.removeAll(1);
         test(
@@ -239,9 +247,25 @@ public class Main {
                 list.head == node1,
                 "List head should be node1"
         );
+        test(
+                list.head.prev == null,
+                "List head.prev should be null"
+        );
+        test(
+                list.head.next == node2,
+                "List head.next should be node2"
+        );
         test (
                 list.tail == node4,
                 "List tail should be node4"
+        );
+        test (
+                list.tail.next == null,
+                "List tail.next should be null"
+        );
+        test(
+                list.tail.prev == node2,
+                "List tail.prev should be node2"
         );
     }
 
@@ -310,8 +334,177 @@ public class Main {
                 "List head should be node"
         );
         test(
+                list.head.prev == null,
+                "List head should not have prev value"
+        );
+        test(
+                list.head.next == node5,
+                "List head.next should be node5"
+        );
+        test(
                 list.tail == node5,
                 "List tail should be node5"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should not have next value"
+        );
+        test(
+                list.tail.prev == node,
+                "List tail.prev should be node"
+        );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForMostlySameValues2() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(1);
+        Node node1 = new Node(3);
+        Node node2 = new Node(1);
+        Node node3 = new Node(1);
+        Node node4 = new Node(5);
+        Node node5 = new Node(1);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+
+        list.removeAll(1);
+        test(
+                list.count() == 2,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 2 "
+                        + list.toString()
+        );
+        test(
+                list.head == node1,
+                "List head should be node1"
+        );
+        test(
+                list.head.prev == null,
+                "List head should not have prev value"
+        );
+        test(
+                list.head.next == node4,
+                "List head.next should be node4"
+        );
+        test(
+                list.tail == node4,
+                "List tail should be node4"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should not have next value"
+        );
+        test(
+                list.tail.prev == node1,
+                "List tail.prev should be node1"
+        );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForMostlySameValues3() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(1);
+        Node node1 = new Node(3);
+        Node node2 = new Node(1);
+        Node node3 = new Node(1);
+        Node node4 = new Node(1);
+        Node node5 = new Node(1);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+
+        list.removeAll(1);
+        test(
+                list.count() == 1,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 2 "
+                        + list.toString()
+        );
+        test(
+                list.head == node1,
+                "List head should be node1"
+        );
+        test(
+                list.head.prev == null,
+                "List head should not have prev value"
+        );
+        test(
+                list.head.next == null,
+                "List head.next should be null"
+        );
+        test(
+                list.tail == node1,
+                "List tail should be node1"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should not have next value"
+        );
+        test(
+                list.tail.prev == null,
+                "List tail.prev should be null"
+        );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForMostlySameValues4() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(1);
+        Node node1 = new Node(3);
+        Node node2 = new Node(1);
+        Node node3 = new Node(1);
+        Node node4 = new Node(1);
+        Node node5 = new Node(1);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+
+        list.removeAll(2);
+        test(
+                list.count() == 6,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 6 "
+                        + list.toString()
+        );
+        test(
+                list.head == node,
+                "List head should be node"
+        );
+        test(
+                list.head.prev == null,
+                "List head should not have prev value"
+        );
+        test(
+                list.head.next == node1,
+                "List head.next should be node1"
+        );
+        test(
+                list.tail == node5,
+                "List tail should be node5"
+        );
+        test(
+                list.tail.next == null,
+                "List tail should not have next value"
+        );
+        test(
+                list.tail.prev == node4,
+                "List tail.prev should be node4"
         );
     }
 
