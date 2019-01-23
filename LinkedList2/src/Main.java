@@ -22,6 +22,7 @@ public class Main {
         testRemoveAllMethodWorksProperlyForMostlySameValues2();
         testRemoveAllMethodWorksProperlyForMostlySameValues3();
         testRemoveAllMethodWorksProperlyForMostlySameValues4();
+        testRemoveAllMethodWorksProperlyForMostlySameValues5();
 
         testClearMethodWorksProperly();
         testInsertAfterMethodWorksProperly();
@@ -506,6 +507,61 @@ public class Main {
                 list.tail.prev == node4,
                 "List tail.prev should be node4"
         );
+    }
+
+    private static void testRemoveAllMethodWorksProperlyForMostlySameValues5() {
+        LinkedList2 list = new LinkedList2();
+
+        Node node = new Node(2);
+        Node node1 = new Node(3);
+        Node node2 = new Node(1);
+        Node node3 = new Node(1);
+        Node node4 = new Node(1);
+        Node node5 = new Node(4);
+        Node node6 = new Node(6);
+
+        list.addInTail(node);
+        list.addInTail(node1);
+        list.addInTail(node2);
+        list.addInTail(node3);
+        list.addInTail(node4);
+        list.addInTail(node5);
+        list.addInTail(node6);
+
+        list.remove(1);
+        list.removeAll(1);
+        int listCount = list.count();
+        test(
+                listCount == 4,
+                "List contains "
+                        + list.count()
+                        + " elements, but should contain 4 "
+                        + list.toString()
+        );
+//        test(
+//                list.head == node,
+//                "List head should be node"
+//        );
+//        test(
+//                list.head.prev == null,
+//                "List head should not have prev value"
+//        );
+//        test(
+//                list.head.next == node1,
+//                "List head.next should be node1"
+//        );
+//        test(
+//                list.tail == node5,
+//                "List tail should be node5"
+//        );
+//        test(
+//                list.tail.next == null,
+//                "List tail should not have next value"
+//        );
+//        test(
+//                list.tail.prev == node4,
+//                "List tail.prev should be node4"
+//        );
     }
 
     private static void testClearMethodWorksProperly() {

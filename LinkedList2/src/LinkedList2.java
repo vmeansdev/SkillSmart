@@ -55,23 +55,21 @@ public class LinkedList2
             return false;
         }
 
-        while (node.value != _value && node.next != null) {
-            node = node.next;
-        }
-
-        if (node.value == _value) {
-            if (node.prev != null) {
-                node.prev.next = node.next;
-                if (node.prev.next == null) {
-                    this.tail = node.prev;
+        while (node != null) {
+            if (node.value == _value) {
+                if (node.prev != null) {
+                    node.prev.next = node.next;
+                } else {
+                    head = node.next;
                 }
-            } else {
-                this.head = node.next;
-                if (node.next == null) {
-                    this.tail = null;
+                if (node.next != null) {
+                    node.next.prev = node.prev;
+                } else {
+                    tail = node.prev;
                 }
+                return true;
             }
-            return true;
+            node = node.next;
         }
 
         return false;
