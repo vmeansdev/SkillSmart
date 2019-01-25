@@ -3,12 +3,12 @@ import java.util.*;
 public class Stack<T>
 {
 
-    private ArrayList<T> store;
+    private LinkedList<T> store;
 
     public Stack()
     {
         // инициализация внутреннего хранилища стека
-        store = new ArrayList<>();
+        store = new LinkedList<>();
     }
 
     public int size()
@@ -21,9 +21,8 @@ public class Stack<T>
     {
         // ваш код
         if (size() > 0) {
-            int lastIndex = store.size() - 1;
-            T element = store.get(lastIndex);
-            store.remove(lastIndex);
+            T element = store.getFirst();
+            store.removeFirst();
             return element;
         }
 
@@ -32,14 +31,14 @@ public class Stack<T>
 
     public void push(T val)
     {
-        store.add(val);
+        store.addFirst(val);
     }
 
     public T peek()
     {
         // ваш код
         if (size() > 0) {
-            return store.get(store.size() - 1);
+            return store.getFirst();
         }
         return null; // если стек пустой
     }
