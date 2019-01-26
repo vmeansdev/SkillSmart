@@ -2,45 +2,34 @@ import java.util.*;
 
 public class Queue<T>
 {
-    private ArrayList<T> store;
+
+    private Stack<T> stack1;
+    private Stack<T> stack2;
 
     public Queue()
     {
         // инициализация внутреннего хранилища очереди
-        store = new ArrayList<>();
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
     }
 
     public void enqueue(T item)
     {
         // вставка в хвост
-        store.add(0, item);
+        stack1.push(item);
     }
 
     public T dequeue()
     {
         // выдача из головы
-        if (size() > 0) {
-            T element = store.get(size() - 1);
-            store.remove(size() - 1);
-            return element;
+        while (stack1.size() > 0) {
+            stack2.push(stack1.pop());
         }
-        return null; // null если очередь пустая
+        return stack2.pop();
     }
 
     public int size()
     {
-        return store.size(); // размер очереди
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for (int i = size() - 1; i >= 0; i--) {
-            sb.append(store.get(i));
-            sb.append(i == 0 ? "" : ", ");
-        }
-        sb.append(']');
-        return sb.toString();
+        return stack1.size() + stack2.size(); // размер очереди
     }
 }
