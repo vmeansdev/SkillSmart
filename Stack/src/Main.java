@@ -92,6 +92,10 @@ public class Main {
                 !BracketBalancer.isStringBalanced("((())"),
                 "String should not be balanced"
         );
+        test(
+                !BracketBalancer.isStringBalanced("())"),
+                "String should not be balanced"
+        );
     }
 
     private static void testPostfixCalculatorWorksWithoutEqOperation() {
