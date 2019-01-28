@@ -8,6 +8,7 @@ public class Main {
         testDequeRemoveTailChangeSize();
         testDequeRemoveFrontReturnsNullWhenDequeIsEmpty();
         testDequeRemoveTailReturnsNullWhenDequeIsEmpty();
+        testPalindromeCheckerWorks();
     }
 
     private static void testDequeInit() {
@@ -58,6 +59,16 @@ public class Main {
         deque.addTail(0);
         test(deque.removeTail() == 0, "Removed element should be 0");
         test(deque.size() == 2, "Size should be 2");
+    }
+
+    private static void testPalindromeCheckerWorks() {
+        test(PalindromeChecker.isPalindrome("radar"), "Should be true");
+        test(PalindromeChecker.isPalindrome("madam"), "Should be true");
+        test(PalindromeChecker.isPalindrome("toot"), "Should be true");
+        test(PalindromeChecker.isPalindrome("lol"), "Should be true");
+        test(!PalindromeChecker.isPalindrome("omfg"), "Should be false");
+        test(!PalindromeChecker.isPalindrome("somthing"), "Should be false");
+
     }
 
     /*

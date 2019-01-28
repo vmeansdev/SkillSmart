@@ -25,16 +25,23 @@ public class Deque<T>
     public T removeFront()
     {
         // удаление из головы
-        T element = size() == 0 ? null : store.get(size() - 1);
-        store.remove(element);
+        if (size() == 0)
+            return null;
+
+        int lastIndex = size() - 1;
+        T element = store.get(lastIndex);
+        store.remove(lastIndex);
         return element;
     }
 
     public T removeTail()
     {
         // удаление из хвоста
-        T element = size() == 0 ? null : store.get(0);
-        store.remove(element);
+        if (size() == 0)
+            return null;
+
+        T element =  store.get(0);
+        store.remove(0);
         return element;
     }
 
