@@ -50,6 +50,7 @@ public class OrderedList<T>
             head = new Node<>(value);
             head.next = null;
             head.prev = null;
+            tail = head;
             return;
         }
 
@@ -73,6 +74,9 @@ public class OrderedList<T>
             newNode.next = before.next;
             newNode.prev = before;
             before.next = newNode;
+            if (newNode.next == null) {
+                tail = newNode;
+            }
         }
     }
 

@@ -9,6 +9,7 @@ public class Main {
         testAddWorksOnIntegersAscSimple();
         testAddWorksOnIntegersAscRandomInsert();
         testAddWorksOnIntegersAscSame();
+        testAddWorksOnIntegersAscEmptyHeadTail();
 
         testAddWorksOnIntegersDescSimple();
         testAddWorksOnIntegersDescRandomInsert();
@@ -46,6 +47,23 @@ public class Main {
         ArrayList<Integer> al = new ArrayList<>();
         al.add(1);
         al.add(2);
+        test(ol.getAllValues(ol.getAll()).equals(al), "Should be equal");
+    }
+
+    private static void testAddWorksOnIntegersAscEmptyHeadTail() {
+        OrderedList<Integer> ol = new OrderedList<>(true);
+        ol.add(1);
+        test(ol.head.value == 1, "Should be 1");
+        test(ol.tail.value == 1, "Should be 1");
+        ol.add(2);
+        test(ol.head.value == 1, "Should be 1");
+        test(ol.tail.value == 2, "Should be 2");
+        ol.add(3);
+        test(ol.tail.value == 3, "Should be 3");
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(1);
+        al.add(2);
+        al.add(3);
         test(ol.getAllValues(ol.getAll()).equals(al), "Should be equal");
     }
 
@@ -159,10 +177,12 @@ public class Main {
 
     private static void testDeleteWorks() {
         OrderedList<Integer> ol = new OrderedList<>(true);
+        ol.delete(1);
         ol.add(1);
         ol.add(2);
         ol.add(3);
         ol.add(2);
+        test(ol.tail.value == 3, "Should be 3");
 
         ArrayList<Integer> al = new ArrayList<>();
         al.add(1);
@@ -170,6 +190,11 @@ public class Main {
         ol.delete(2);
         test(ol.count() == 2, "Size should be 2");
         test(ol.getAllValues(ol.getAll()).equals(al), "Should be equal");
+        test(ol.tail.value == 3, "Should be 3");
+        ol.delete(3);
+        ol.delete(1);
+        test(ol.head == null, "Should be null");
+        test(ol.tail == null, "Should be null");
     }
 
     /*
