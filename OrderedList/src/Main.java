@@ -22,6 +22,7 @@ public class Main {
         testFindWorksElementNotAddedDesc();
 
         testDeleteWorks();
+        testInsertInNonEmptyList();
     }
 
     private static void testOrderedListInit() {
@@ -195,6 +196,38 @@ public class Main {
         ol.delete(1);
         test(ol.head == null, "Should be null");
         test(ol.tail == null, "Should be null");
+    }
+
+    private static void testInsertInNonEmptyList() {
+        OrderedList<Integer> ol = new OrderedList<>(true);
+        ol.add(0);
+        ol.add(2);
+        ol.add(1);
+        ol.add(1);
+        ol.add(0);
+        ol.add(2);
+        ol.add(2);
+        ol.add(1);
+        ol.add(0);
+        ol.add(0);
+        ArrayList<Integer> alol = ol.getAllValues(ol.getAll());
+        test(ol.head.value == 0, "Should be 0");
+        test(ol.tail.value == 2, "Should be 2");
+        int ascIndex = 0;
+        Node<Integer> node = ol.head;
+        while (node != null) {
+            test(node.value.equals(alol.get(ascIndex)), "Should be equal");
+            node = node.next;
+            ascIndex += 1;
+        }
+
+        int descIndex = alol.size() - 1;
+        Node<Integer> tNode = ol.tail;
+        while (tNode != null) {
+            test(tNode.value.equals(alol.get(descIndex)), "Should be equal");
+            tNode = tNode.prev;
+            descIndex -= 1;
+        }
     }
 
     /*

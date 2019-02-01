@@ -47,7 +47,7 @@ public class OrderedList<T>
         Node<T> newNode = new Node<>(value);
 
         if (head == null) {
-            head = new Node<>(value);
+            head = newNode;
             head.next = null;
             head.prev = null;
             tail = head;
@@ -74,6 +74,8 @@ public class OrderedList<T>
             newNode.next = before.next;
             newNode.prev = before;
             before.next = newNode;
+            if (after != null)
+                after.prev = newNode;
             if (newNode.next == null) {
                 tail = newNode;
             }
