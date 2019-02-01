@@ -187,15 +187,13 @@ public class Main {
 
         ArrayList<Integer> al = new ArrayList<>();
         al.add(1);
+        al.add(2);
         al.add(3);
+        int prevCount = ol.count() - 1;
         ol.delete(2);
-        test(ol.count() == 2, "Size should be 2");
+        test(ol.count() == prevCount, "Size should be 4");
         test(ol.getAllValues(ol.getAll()).equals(al), "Should be equal");
         test(ol.tail.value == 3, "Should be 3");
-        ol.delete(3);
-        ol.delete(1);
-        test(ol.head == null, "Should be null");
-        test(ol.tail == null, "Should be null");
     }
 
     private static void testInsertInNonEmptyList() {

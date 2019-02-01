@@ -121,6 +121,7 @@ public class OrderedList<T>
                 } else {
                     tail = node.prev;
                 }
+                return;
             }
             node = node.next;
         }
