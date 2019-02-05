@@ -27,14 +27,30 @@ public class HashTable
         return sum % size;
     }
 
+    private int hashFun2(int index, int counter) {
+        int step = (this.step % size == 0) ? this.step + 1 : this.step;
+        return (index + (step * counter)) % size;
+    }
+
     public int seekSlot(String value)
     {
         // находит индекс пустого слота для значения, или -1
         int index = hashFun(value);
+        int start = index;
+        int counter = 1;
+        do {
+            if (slots[index] == null) {
+                return index;
+            } else {
+                index = hashFun2(index, counter);
+                if (index >= size) {
+                    index = 0;
+                    counter += 1;
+                }
+            }
+        } while (slots[index] != null && index != start);
 
-
-
-        return slots[index] != null ? -1 : index;
+        return index == start ? -1 : index;
     }
 
     public int put(String value)
@@ -54,10 +70,24 @@ public class HashTable
     public int find(String value)
     {
         // находит индекс слота со значением, или -1
-        int slotIndex = seekSlot(value);
-        if (slotIndex != -1 && slots[slotIndex] != null) {
-            return slotIndex;
-        }
+        int index = hashFun(value);
+        int start = index;
+        int counter = 1;
+        do {
+            if (slots[index] == null) {
+                return -1;
+            } else {
+                index = hashFun2(index, counter);
+                if (index >= size) {
+                    index = 0;
+                    counter += 1;
+                }
+            }
+        } while (slots[index] != null && !slots[index].equals(value) && index != start);
+
+        if (slots[index] != null && slots[index].equals(value))
+            return index;
+
         return -1;
     }
 
