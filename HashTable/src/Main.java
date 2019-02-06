@@ -1,3 +1,6 @@
+import java.nio.charset.Charset;
+import java.util.Random;
+
 public class Main {
 
     private static String[] words = {"hello", "olleh", "aaa", "aab", "aba", "bba",
@@ -7,9 +10,24 @@ public class Main {
     public static void main(String[] args) {
         testHashTableInit();
         testSeekSlot();
-        stressTestSeekSlot();
+//        stressTestSeekSlot();
         testFind();
-        stressTestFind();
+//        stressTestFind();
+        testHashFun();
+    }
+
+    private static String randomString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 32;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
     }
 
     private static void testHashTableInit() {
@@ -17,22 +35,32 @@ public class Main {
         test(ht.slots[0] == null, "Should be null");
     }
 
+    private static void testHashFun() {
+        HashTable ht = new HashTable(19, 3);
+        for (int i = 0; i < 1000; i++) {
+            String random = randomString();
+            int hash = ht.hashFun(random);
+            test(hash == ht.hashFun(random), "Should be equal");
+        }
+    }
+
     private static void seekCase(int size, int step) {
         HashTable ht = new HashTable(size, step);
-        for (String word : words) {
-            int slotIndex = ht.seekSlot(word);
-            ht.put(word);
-            test(ht.slots[slotIndex].equals(word), "Should be equal");
+        for (int i = 0; i < size; i++) {
+            String generatedString = randomString();
+            int slotIndex = ht.seekSlot(generatedString);
+            ht.put(generatedString);
+            if (slotIndex != -1) {
+                test(ht.slots[slotIndex].equals(generatedString), "Should be equal");
+            } else {
+                int foundIndex = ht.find(generatedString);
+                System.out.println(
+                    "slotIndex = " + slotIndex + " ht.size = " + size + " step = " + step + " value = " + generatedString
+                    + " foundIndex = " + foundIndex
+                );
+            }
         }
-        ht.put("more");
-        ht.put("words");
-        test(ht.getSize() == 19, "Should be 19");
-        int slotIndex = ht.seekSlot("baa");
-        test(slotIndex == -1, "Should be -1 as ht is full");
-        int aaaSlotIndex = ht.find("aaa");
-        test(aaaSlotIndex != ht.seekSlot("aaa"), "Should NOT be equal");
-        int noValueIndex = ht.find("lol");
-        test(noValueIndex == -1, "Should be -1");
+        test(ht.getSize() == size, "Should be as given size");
     }
 
     private static void testSeekSlot() {
@@ -40,8 +68,10 @@ public class Main {
     }
 
     private static void stressTestSeekSlot() {
-        for (int step = 1; step <= 1000; step++) {
-            seekCase(19, step);
+        for(int size = 1; size <= 1000; size++) {
+            for (int step = 1; step <= 1000; step++) {
+                seekCase(size, step);
+            }
         }
     }
 
