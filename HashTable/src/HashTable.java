@@ -77,10 +77,14 @@ public class HashTable
             if (slots[index] == null) {
                 return -1;
             } else {
-                index = hashFun2(index, counter);
-                if (index >= size) {
-                    index = 0;
-                    counter += 1;
+                if (slots[index].equals(value)) {
+                    break;
+                } else {
+                    index = hashFun2(index, counter);
+                    if (index >= size) {
+                        index = 0;
+                        counter += 1;
+                    }
                 }
             }
         } while (slots[index] != null && !slots[index].equals(value) && index != start);

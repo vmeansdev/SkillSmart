@@ -12,7 +12,7 @@ public class Main {
         testSeekSlot();
 //        stressTestSeekSlot();
         testFind();
-//        stressTestFind();
+        stressTestFind();
         testHashFun();
     }
 
@@ -77,12 +77,15 @@ public class Main {
 
     private static void findCase(int size, int step) {
         HashTable ht = new HashTable(size, step);
-        for (String word : words) {
-            int slotIndex = ht.find(word);
-            test(slotIndex == -1, "Should be -1");
-            ht.put(word);
+        for (int i = 0; i < size; i++) {
+            String random = randomString();
+            int index = ht.find(random);
+            test(index == -1, "Should be -1");
+            ht.put(random);
+            int newIndex = ht.find(random);
+            test(newIndex != -1, "Should NOT be -1");
         }
-        test(ht.getSize() == 17, "Should be 17");
+        test(ht.getSize() == size, "Should be " + size);
     }
 
     private static void testFind() {
